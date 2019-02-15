@@ -407,6 +407,59 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get_all_Validate_DB_Count_did_not_change",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eb7bd4af-3437-404a-8b28-2fa791107d08",
+						"exec": [
+							"var responseBody = JSON.parse(responseBody);",
+							"",
+							"if (responseCode.code === 200) ",
+							"{",
+							"    pm.test(\"Record count is correct after wrong delete request?\", pm.environment.get(\"dbCount\") === responseBody.length);",
+							"}",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "{{db_key_format}}",
+						"type": "text",
+						"value": "{{db_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}{{service_endpoint}}",
+					"host": [
+						"{{url}}{{service_endpoint}}"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
