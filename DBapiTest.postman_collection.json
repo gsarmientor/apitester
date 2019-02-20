@@ -137,7 +137,7 @@
 							"",
 							"if (responseCode.code === 200) ",
 							"{",
-							"    pm.test(\"Record count is correct?\", pm.environment.get(\"dbCount\") === responseBody.length + pm.environment.get(\"newRecordsCount\"));",
+							"    pm.test(\"Record count is correct?\", responseBody.length === pm.environment.get(\"dbCount\") + pm.environment.get(\"newRecordsCount\"));",
 							"}",
 							"",
 							"pm.test(\"Status code is 200\", function () {",
@@ -243,7 +243,7 @@
 							"//{",
 							"    pm.test(\"Record updated?\", responseBody._id !== \"\");",
 							"//}",
-							"",
+							"console.log(responseBody);",
 							"//pm.test(\"Status code is 200\", function () {",
 							"//    pm.response.to.have.status(200);",
 							"//});"
