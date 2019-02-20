@@ -237,11 +237,7 @@
 					"script": {
 						"id": "38251776-87b4-4069-b55c-1573ac828453",
 						"exec": [
-							"var tokenResponseBody = JSON.parse(responseBody);",
-							"",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
