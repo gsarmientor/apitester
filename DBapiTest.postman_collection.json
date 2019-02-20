@@ -244,9 +244,9 @@
 							"    pm.test(\"Record updated?\", responseBody._id !== \"\");",
 							"}",
 							"",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
+							"//pm.test(\"Status code is 200\", function () {",
+							"//    pm.response.to.have.status(200);",
+							"//});"
 						],
 						"type": "text/javascript"
 					}
