@@ -239,7 +239,7 @@
 						"exec": [
 							"var responseBody = JSON.parse(responseBody);",
 							"",
-							"pm.test(\"Record updated?\", resposeBody._id !== \"\");",
+							"pm.test(\"Record updated?\", responseBody._id !== \"\");",
 							"",
 							"//pm.test(\"Status code is 200\", function () {",
 							"//    pm.response.to.have.status(200);",
