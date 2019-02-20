@@ -186,7 +186,7 @@
 					"script": {
 						"id": "eb7bd4af-3437-404a-8b28-2fa791107d08",
 						"exec": [
-							"var tokenResponseBody = JSON.parse(responseBody);",
+							"var responseBody = JSON.parse(responseBody);",
 							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
@@ -237,7 +237,11 @@
 					"script": {
 						"id": "38251776-87b4-4069-b55c-1573ac828453",
 						"exec": [
-							""
+							"var responseBody = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
