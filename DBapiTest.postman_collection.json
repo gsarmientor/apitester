@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "661d952c-0676-488b-95bc-292099b74d7a",
-		"name": "DBapiTest copy",
+		"_postman_id": "fc54c3ae-995b-4b8c-98af-07507a4714b3",
+		"name": "DBapiTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -50,9 +50,9 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{url}}{{endpoint_accountid}}",
+					"raw": "{{url}}{{service_endpoint}}",
 					"host": [
-						"{{url}}{{endpoint_accountid}}"
+						"{{url}}{{service_endpoint}}"
 					]
 				}
 			},
@@ -90,6 +90,7 @@
 							"         idArray[i] = responseBody[i]._id;",
 							"    }",
 							"    pm.environment.set(\"newId\", idArray);",
+							"    pm.environment.set(\"singleNewId\", idArray[0]);",
 							"    pm.environment.set(\"newRecordsCount\", responseBody.length);",
 							"}"
 						],
@@ -116,9 +117,9 @@
 					"raw": "{{postBody}}"
 				},
 				"url": {
-					"raw": "{{url}}{{endpoint_accountid}}",
+					"raw": "{{url}}{{service_endpoint}}",
 					"host": [
-						"{{url}}{{endpoint_accountid}}"
+						"{{url}}{{service_endpoint}}"
 					]
 				}
 			},
@@ -169,9 +170,9 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{url}}{{endpoint_accountid}}",
+					"raw": "{{url}}{{service_endpoint}}",
 					"host": [
-						"{{url}}{{endpoint_accountid}}"
+						"{{url}}{{service_endpoint}}"
 					]
 				}
 			},
@@ -217,12 +218,60 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{url}}{{endpoint_accountid}}/{{newId}}",
+					"raw": "{{url}}{{service_endpoint}}/{{singleNewId}}",
 					"host": [
-						"{{url}}{{endpoint_accountid}}"
+						"{{url}}{{service_endpoint}}"
 					],
 					"path": [
-						"{{newId}}"
+						"{{singleNewId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put request by Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "38251776-87b4-4069-b55c-1573ac828453",
+						"exec": [
+							"var tokenResponseBody = JSON.parse(responseBody);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "{{db_key_format}}",
+						"value": "{{db_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{putBody}}"
+				},
+				"url": {
+					"raw": "{{url}}{{service_endpoint}}/{{singleNewId}}",
+					"host": [
+						"{{url}}{{service_endpoint}}"
+					],
+					"path": [
+						"{{singleNewId}}"
 					]
 				}
 			},
@@ -293,9 +342,9 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{url}}{{endpoint_accountid}}/{{idFromArray}}",
+					"raw": "{{url}}{{service_endpoint}}/{{idFromArray}}",
 					"host": [
-						"{{url}}{{endpoint_accountid}}"
+						"{{url}}{{service_endpoint}}"
 					],
 					"path": [
 						"{{idFromArray}}"
@@ -349,9 +398,9 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{url}}{{endpoint_accountid}}",
+					"raw": "{{url}}{{service_endpoint}}",
 					"host": [
-						"{{url}}{{endpoint_accountid}}"
+						"{{url}}{{service_endpoint}}"
 					]
 				}
 			},
@@ -397,9 +446,9 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{url}}{{endpoint_accountid}}/{{wrongId}}",
+					"raw": "{{url}}{{service_endpoint}}/{{wrongId}}",
 					"host": [
-						"{{url}}{{endpoint_accountid}}"
+						"{{url}}{{service_endpoint}}"
 					],
 					"path": [
 						"{{wrongId}}"
