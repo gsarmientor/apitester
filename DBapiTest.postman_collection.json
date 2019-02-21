@@ -13,7 +13,7 @@
 					"script": {
 						"id": "eb7bd4af-3437-404a-8b28-2fa791107d08",
 						"exec": [
-							"var responseBody = JSON.parse(responseBody);",
+							"var responseBody = pm.response.json();",
 							"",
 							"if (responseCode.code === 200) ",
 							"{",
@@ -76,9 +76,10 @@
 					"script": {
 						"id": "f1aae3dd-99d5-47c1-9636-692e3ca1eb71",
 						"exec": [
-							"var responseBody = JSON.parse(responseBody);",
-							"//let newId = responseBody._id;",
+							"var responseBody = pm.response.json();",
 							"let idArray =[];",
+							"var Ajv = require('ajv');",
+							"ajv = new Ajv({logger: console});",
 							"",
 							"pm.test(\"Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
@@ -92,6 +93,9 @@
 							"    pm.environment.set(\"newId\", idArray);",
 							"    pm.environment.set(\"singleNewId\", idArray[0]);",
 							"    pm.environment.set(\"newRecordsCount\", responseBody.length);",
+							"    pm.test('Schema is valid', function() {",
+							"    pm.expect(ajv.validate(JSON.parse(pm.environment.get(\"accountSchema\")), responseBody)).to.be.true;",
+							"    });",
 							"}"
 						],
 						"type": "text/javascript"
@@ -133,7 +137,8 @@
 					"script": {
 						"id": "eb7bd4af-3437-404a-8b28-2fa791107d08",
 						"exec": [
-							"var responseBody = JSON.parse(responseBody);",
+							"var responseBody = pm.response.json();",
+							"",
 							"",
 							"if (responseCode.code === 200) ",
 							"{",
@@ -142,7 +147,9 @@
 							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
-							"});"
+							"});",
+							"",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -186,11 +193,13 @@
 					"script": {
 						"id": "eb7bd4af-3437-404a-8b28-2fa791107d08",
 						"exec": [
-							"var responseBody = JSON.parse(responseBody);",
+							"var responseBody = pm.response.json();",
 							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
-							"});"
+							"});",
+							"",
+							"tests[\"Response Schema is valid\"] = tv4.validate(responseBody, pm.environment.get(\"ResponseBodyAccountSchema\"));"
 						],
 						"type": "text/javascript"
 					}
@@ -290,7 +299,7 @@
 					"script": {
 						"id": "eb7bd4af-3437-404a-8b28-2fa791107d08",
 						"exec": [
-							"var responseBody = JSON.parse(responseBody);",
+							"var responseBody = pm.response.json();",
 							"var ids = pm.environment.get(\"newId\");",
 							"",
 							"if (ids && ids.length > 0)",
@@ -366,7 +375,7 @@
 					"script": {
 						"id": "eb7bd4af-3437-404a-8b28-2fa791107d08",
 						"exec": [
-							"var responseBody = JSON.parse(responseBody);",
+							"var responseBody = pm.response.json();",
 							"",
 							"if (responseCode.code === 200) ",
 							"{",
@@ -419,7 +428,7 @@
 					"script": {
 						"id": "eb7bd4af-3437-404a-8b28-2fa791107d08",
 						"exec": [
-							"var responseBody = JSON.parse(responseBody);",
+							"var responseBody = pm.response.json();",
 							"pm.test(\"Status code is 400\", function () {",
 							"    pm.response.to.have.status(400);",
 							"});",
