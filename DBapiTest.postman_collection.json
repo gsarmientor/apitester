@@ -93,10 +93,11 @@
 							"    pm.environment.set(\"newId\", idArray);",
 							"    pm.environment.set(\"singleNewId\", idArray[0]);",
 							"    pm.environment.set(\"newRecordsCount\", responseBody.length);",
-							"    pm.test('Schema is valid', function() {",
-							"    pm.expect(ajv.validate(JSON.parse(pm.environment.get(\"accountSchema\")), responseBody)).to.be.true;",
-							"    console.log(ajv.error);",
-							"    });",
+							"    tests[\"Schema is valid\"] = ajv.validate(JSON.parse(pm.environment.get(\"accountSchema\")), responseBody);",
+							"    //pm.test('Schema is valid', function() {",
+							"    //pm.expect(ajv.validate(JSON.parse(pm.environment.get(\"accountSchema\")), responseBody)).to.be.true;",
+							"    //console.log(ajv.error);",
+							"    //});",
 							"}"
 						],
 						"type": "text/javascript"
