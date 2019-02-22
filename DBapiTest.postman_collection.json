@@ -93,9 +93,9 @@
 							"    pm.environment.set(\"singleNewId\", idArray[0]);",
 							"    pm.environment.set(\"newRecordsCount\", responseBody.length);",
 							"    pm.test(\"Schema is valid\", schemaValidation.valid === true);",
-							"    if (!schemaValidation.valid) {",
+							"    //if (!schemaValidation.valid) {",
 							"        console.log(schemaValidation);",
-							"    }",
+							"    //}",
 							"}"
 						],
 						"type": "text/javascript"
