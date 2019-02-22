@@ -245,16 +245,20 @@
 					"script": {
 						"id": "38251776-87b4-4069-b55c-1573ac828453",
 						"exec": [
-							"var responseBody = JSON.parse(responseBody);",
+							"var responseBody = pm.response.json();",
 							"",
-							"//if (responseCode.code === 200) ",
-							"//{",
-							"    pm.test(\"Record updated?\", responseBody._id !== \"\");",
-							"//}",
-							"console.log(responseBody);",
-							"//pm.test(\"Status code is 200\", function () {",
-							"//    pm.response.to.have.status(200);",
-							"//});"
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (responseCode.code === 200) ",
+							"{",
+							"    var schemaValidation = tv4.validateResult(responseBody, JSON.parse(pm.environment.get(\"accountSchema\")));",
+							"    pm.test(\"Schema is valid\", schemaValidation.valid === true);",
+							"    if (!schemaValidation.valid) {",
+							"        console.log(schemaValidation);",
+							"    }",
+							"}"
 						],
 						"type": "text/javascript"
 					}
